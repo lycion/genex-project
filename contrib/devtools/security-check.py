@@ -204,12 +204,11 @@ if __name__ == '__main__':
                     else:
                         failed.append(name)
             if failed:
-                print('%s: failed %s' % (filename, ' '.join(failed)))
+                print(f'{filename}: failed {' '.join(failed)}')
                 retval = 1
             if warning:
-                print('%s: warning %s' % (filename, ' '.join(warning)))
+                print(f'{filename}: warning {' '.join(warning)}')
         except IOError:
-            print('%s: cannot open' % filename)
+            print(f'{filename}: cannot open')
             retval = 1
     sys.exit(retval)
-
