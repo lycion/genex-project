@@ -69,19 +69,18 @@ def get_filenames_to_examine():
 
 COPYRIGHT_WITH_C = 'Copyright \(c\)'
 COPYRIGHT_WITHOUT_C = 'Copyright'
-ANY_COPYRIGHT_STYLE = '(%s|%s)' % (COPYRIGHT_WITH_C, COPYRIGHT_WITHOUT_C)
+ANY_COPYRIGHT_STYLE = f'({COPYRIGHT_WITH_C}|{COPYRIGHT_WITHOUT_C})'
 
 YEAR = "20[0-9][0-9]"
-YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
-YEAR_LIST = '(%s)(, %s)+' % (YEAR, YEAR)
-ANY_YEAR_STYLE = '(%s|%s)' % (YEAR_RANGE, YEAR_LIST)
-ANY_COPYRIGHT_STYLE_OR_YEAR_STYLE = ("%s %s" % (ANY_COPYRIGHT_STYLE,
-                                                ANY_YEAR_STYLE))
+YEAR_RANGE = f'({YEAR})(-{YEAR})?'
+YEAR_LIST = f'({YEAR})(, %s)+'
+ANY_YEAR_STYLE = f'({YEAR_RANGE}|{YEAR_LIST})'
+ANY_COPYRIGHT_STYLE_OR_YEAR_STYLE = (f"{ANY_COPYRIGHT_STYLE} {ANY_YEAR_STYLE}")
 
 ANY_COPYRIGHT_COMPILED = re.compile(ANY_COPYRIGHT_STYLE_OR_YEAR_STYLE)
 
 def compile_copyright_regex(copyright_style, year_style, name):
-    return re.compile('%s %s %s' % (copyright_style, year_style, name))
+    return re.compile(f'{copyright_style} {year_style} {name}')
 
 EXPECTED_HOLDER_NAMES = [
     "Satoshi Nakamoto\n",
@@ -189,31 +188,30 @@ def print_filenames(filenames, verbose):
 def print_report(file_infos, verbose):
     print(SEPARATOR)
     examined = [i['filename'] for i in file_infos]
-    print("%d files examined according to INCLUDE and EXCLUDE fnmatch rules" %
-          len(examined))
+    print(f"{len(examined)} files examined according to INCLUDE and EXCLUDE fnmatch rules"
     print_filenames(examined, verbose)
 
     print(SEPARATOR)
     print('')
     zero_copyrights = [i['filename'] for i in file_infos if
                        i['all_copyrights'] == 0]
-    print("%4d with zero copyrights" % len(zero_copyrights))
+    print(f"{len(zero_copyrights)} with zero copyrights")
     print_filenames(zero_copyrights, verbose)
     one_copyright = [i['filename'] for i in file_infos if
                      i['all_copyrights'] == 1]
-    print("%4d with one copyright" % len(one_copyright))
+    print(f"{len(one_copyright)} with one copyright")
     print_filenames(one_copyright, verbose)
     two_copyrights = [i['filename'] for i in file_infos if
                       i['all_copyrights'] == 2]
-    print("%4d with two copyrights" % len(two_copyrights))
+    print(f"{len(two_copyrights)} with two copyrights")
     print_filenames(two_copyrights, verbose)
     three_copyrights = [i['filename'] for i in file_infos if
                         i['all_copyrights'] == 3]
-    print("%4d with three copyrights" % len(three_copyrights))
+    print(f"{len(three_copyrights)} with three copyrights")
     print_filenames(three_copyrights, verbose)
     four_or_more_copyrights = [i['filename'] for i in file_infos if
                                i['all_copyrights'] >= 4]
-    print("%4d with four or more copyrights" % len(four_or_more_copyrights))
+    print(f"{len(four_or_more_copyrights)} with four or more copyrights")
     print_filenames(four_or_more_copyrights, verbose)
     print('')
     print(SEPARATOR)
@@ -223,8 +221,7 @@ def print_report(file_infos, verbose):
         dominant_style = [i['filename'] for i in file_infos if
                           i['dominant_style'][holder_name]]
         if len(dominant_style) > 0:
-            print("%4d with '%s'" % (len(dominant_style),
-                                     holder_name.replace('\n', '\\n')))
+            print(f"{len(dominant_style)} with '{holder_name.replace('\n', '\\n')}'")
             print_filenames(dominant_style, verbose)
     print('')
     print(SEPARATOR)
@@ -234,8 +231,7 @@ def print_report(file_infos, verbose):
         year_list_style = [i['filename'] for i in file_infos if
                            i['year_list_style'][holder_name]]
         if len(year_list_style) > 0:
-            print("%4d with '%s'" % (len(year_list_style),
-                                     holder_name.replace('\n', '\\n')))
+            print(f"{len(year_list_style)} with '{holder_name.replace('\n', '\\n')}'")
             print_filenames(year_list_style, verbose)
     print('')
     print(SEPARATOR)
@@ -245,8 +241,7 @@ def print_report(file_infos, verbose):
         without_c_style = [i['filename'] for i in file_infos if
                            i['without_c_style'][holder_name]]
         if len(without_c_style) > 0:
-            print("%4d with '%s'" % (len(without_c_style),
-                                     holder_name.replace('\n', '\\n')))
+            print(f"{len(without_c_style)} with '{holder_name.replace('\n', '\\n')}'")
             print_filenames(without_c_style, verbose)
 
     print('')
@@ -254,8 +249,7 @@ def print_report(file_infos, verbose):
 
     unclassified_copyrights = [i['filename'] for i in file_infos if
                                i['classified_copyrights'] < i['all_copyrights']]
-    print("%d with unexpected copyright holder names" %
-          len(unclassified_copyrights))
+    print(f"{len(unclassified_copyrights)} with unexpected copyright holder names")
     print_filenames(unclassified_copyrights, verbose)
     print(SEPARATOR)
 
@@ -289,14 +283,14 @@ def report_cmd(argv):
 
     base_directory = argv[2]
     if not os.path.exists(base_directory):
-        sys.exit("*** bad <base_directory>: %s" % base_directory)
+        sys.exit(f"*** bad <base_directory>: {base_directory}")
 
     if len(argv) == 3:
         verbose = False
     elif argv[3] == 'verbose':
         verbose = True
     else:
-        sys.exit("*** unknown argument: %s" % argv[2])
+        sys.exit(f"*** unknown argument: {argv[2]}")
 
     exec_report(base_directory, verbose)
 
@@ -341,7 +335,7 @@ def write_file_lines(filename, file_lines):
 
 COPYRIGHT = 'Copyright \(c\)'
 YEAR = "20[0-9][0-9]"
-YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
+YEAR_RANGE = f'({YEAR})(-{YEAR})?'
 HOLDER = 'The Bitcoin Core developers'
 UPDATEABLE_LINE_COMPILED = re.compile(' '.join([COPYRIGHT, YEAR_RANGE, HOLDER]))
 
@@ -363,7 +357,7 @@ def parse_year_range(year_range):
 def year_range_to_str(start_year, end_year):
     if start_year == end_year:
         return start_year
-    return "%s-%s" % (start_year, end_year)
+    return f"{start_year}-{end_year}"
 
 def create_updated_copyright_line(line, last_git_change_year):
     copyright_splitter = 'Copyright (c) '
@@ -396,7 +390,7 @@ def update_updatable_copyright(filename):
     file_lines[index] = new_line
     write_file_lines(filename, file_lines)
     print_file_action_message(filename,
-                              "Copyright updated! -> %s" % last_git_change_year)
+                              f"Copyright updated! -> {last_git_change_year}")
 
 def exec_update_header_year(base_directory):
     original_cwd = os.getcwd()
@@ -439,7 +433,7 @@ Arguments:
 """
 
 def print_file_action_message(filename, action):
-    print("%-52s %s" % (filename, action))
+    print(f"{filename} {action}")
 
 def update_cmd(argv):
     if len(argv) != 3:
@@ -447,7 +441,7 @@ def update_cmd(argv):
 
     base_directory = argv[2]
     if not os.path.exists(base_directory):
-        sys.exit("*** bad base_directory: %s" % base_directory)
+        sys.exit(f"*** bad base_directory: {base_directory}")
     exec_update_header_year(base_directory)
 
 ################################################################################
@@ -523,8 +517,7 @@ def insert_cpp_header(filename, file_lines, start_year, end_year):
 def exec_insert_header(filename, style):
     file_lines = read_file_lines(filename)
     if file_already_has_core_copyright(file_lines):
-        sys.exit('*** %s already has a copyright by The Bitcoin Core developers'
-                 % (filename))
+        sys.exit(f'*** {filename} already has a copyright by The Bitcoin Core developers')
     start_year, end_year = get_git_change_year_range(filename)
     if style == 'python':
         insert_python_header(filename, file_lines, start_year, end_year)
@@ -566,10 +559,10 @@ def insert_cmd(argv):
 
     filename = argv[2]
     if not os.path.isfile(filename):
-        sys.exit("*** bad filename: %s" % filename)
+        sys.exit(f"*** bad filename: {filename}")
     _, extension = os.path.splitext(filename)
     if extension not in ['.h', '.cpp', '.cc', '.c', '.py']:
-        sys.exit("*** cannot insert for file extension %s" % extension)
+        sys.exit(f"*** cannot insert for file extension {extension}")
 
     if extension == '.py':
         style = 'python'

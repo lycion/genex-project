@@ -89,14 +89,16 @@ def check_format_specifiers(source, translation, errors, numerus):
     try:
         translation_f = split_format_specifiers(find_format_specifiers(translation))
     except IndexError:
-        errors.append("Parse error in translation for '%s': '%s'" % (sanitize_string(source), sanitize_string(translation)))
+        '''Use f-strings for interpolation since they're easier to read than placeholders. Need python 3.6.x or higher to use'''
+        errors.append(f"Parse error in translation for '{sanitize_string(source)}': '{sanitize_string(translation)}'")
         return False
     else:
         if source_f != translation_f:
             if numerus and source_f == (set(), ['n']) and translation_f == (set(), []) and translation.find('%') == -1:
                 # Allow numerus translations to omit %n specifier (usually when it only has one possible value)
                 return True
-            errors.append("Mismatch between '%s' and '%s'" % (sanitize_string(source), sanitize_string(translation)))
+            '''Use f-strings for interpolation since they're easier to read than placeholders. Need python 3.6.x or higher to use'''
+            errors.append(f"Mismatch between '{sanitize_string(source)}' and '{sanitize_string(translation)}'")
             return False
     return True
 
@@ -126,7 +128,8 @@ def escape_cdata(text):
 
 def contains_bitcoin_addr(text, errors):
     if text != None and ADDRESS_REGEXP.search(text) != None:
-        errors.append('Translation "%s" contains a bitcoin address. This will be removed.' % (text))
+        #f-strings again
+        errors.append(f'Translation "{text}" contains a bitcoin address. This will be removed.')
         return True
     return False
 
@@ -171,7 +174,8 @@ def postprocess_translations(reduce_diff_hacks=False):
                     valid = check_format_specifiers(source, translation, errors, numerus) and not contains_bitcoin_addr(translation, errors)
 
                     for error in errors:
-                        print('%s: %s' % (filename, error))
+                        #fstrings once more
+                        print(f'{filename}: {error}')
 
                     if not valid: # set type to unfinished and clear string if invalid
                         translation_node.clear()
@@ -192,7 +196,8 @@ def postprocess_translations(reduce_diff_hacks=False):
             for message in context.findall('message'):
                 num_messages += 1
         if num_messages < MIN_NUM_MESSAGES:
-            print('Removing %s, as it contains only %i messages' % (filepath, num_messages))
+            #f-strings again
+            print(f'Removing , {filepath} as it contains only {num_messages}i messages')
             continue
 
         # write fixed-up tree
@@ -212,4 +217,3 @@ if __name__ == '__main__':
     check_at_repository_root()
     fetch_all_translations()
     postprocess_translations()
-

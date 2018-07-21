@@ -53,7 +53,7 @@ def git_config_get(option, default=None):
 def retrieve_pr_info(repo,pull):
     '''
     Retrieve pull request information from github.
-    Return None if no title can be found, or an error happens.
+    Return None if no title can be found, or an error occurs.
     '''
     try:
         req = Request("https://api.github.com/repos/"+repo+"/pulls/"+pull)
@@ -62,7 +62,7 @@ def retrieve_pr_info(repo,pull):
         obj = json.load(reader(result))
         return obj
     except Exception as e:
-        print('Warning: unable to retrieve pull information from github: %s' % e)
+        print(f'Warning: unable to retrieve pull information from github: {e}')
         return None
 
 def ask_prompt(text):
@@ -130,7 +130,7 @@ def tree_sha512sum(commit='HEAD'):
     return overall.hexdigest()
 
 def print_merge_details(pull, title, branch, base_branch, head_branch):
-    print('%s#%s%s %s %sinto %s%s' % (ATTR_RESET+ATTR_PR,pull,ATTR_RESET,title,ATTR_RESET+ATTR_PR,branch,ATTR_RESET))
+    print(f'{ATTR_RESET+ATTR_PR}#{pull}{ATTR_RESET} {title} {ATTR_RESET+ATTR_PR}into {branch}{ATTR_RESET}')
     subprocess.check_call([GIT,'log','--graph','--topo-order','--pretty=format:'+COMMIT_FORMAT,base_branch+'..'+head_branch])
 
 def parse_arguments():
@@ -195,23 +195,23 @@ def main():
     try:
         subprocess.check_call([GIT,'checkout','-q',branch])
     except subprocess.CalledProcessError:
-        print("ERROR: Cannot check out branch %s." % (branch), file=stderr)
+        print(f"ERROR: Cannot check out branch {branch}.", file=stderr)
         sys.exit(3)
     try:
         subprocess.check_call([GIT,'fetch','-q',host_repo,'+refs/pull/'+pull+'/*:refs/heads/pull/'+pull+'/*',
                                                           '+refs/heads/'+branch+':refs/heads/'+base_branch])
     except subprocess.CalledProcessError:
-        print("ERROR: Cannot find pull request #%s or branch %s on %s." % (pull,branch,host_repo), file=stderr)
+        print(f"ERROR: Cannot find pull request #{pull} or branch {branch} on {host_repo}.", file=stderr)
         sys.exit(3)
     try:
         subprocess.check_call([GIT,'log','-q','-1','refs/heads/'+head_branch], stdout=devnull, stderr=stdout)
     except subprocess.CalledProcessError:
-        print("ERROR: Cannot find head of pull request #%s on %s." % (pull,host_repo), file=stderr)
+        print(f"ERROR: Cannot find head of pull request #{pull} on {host_repo}.", file=stderr)
         sys.exit(3)
     try:
         subprocess.check_call([GIT,'log','-q','-1','refs/heads/'+merge_branch], stdout=devnull, stderr=stdout)
     except subprocess.CalledProcessError:
-        print("ERROR: Cannot find merge of pull request #%s on %s." % (pull,host_repo), file=stderr)
+        print(f"ERROR: Cannot find merge of pull request #{pull} on {host_repo}.", file=stderr)
         sys.exit(3)
     subprocess.check_call([GIT,'checkout','-q',base_branch])
     subprocess.call([GIT,'branch','-q','-D',local_merge_branch], stderr=devnull)
@@ -223,9 +223,9 @@ def main():
         os.chdir(toplevel)
         # Create unsigned merge commit.
         if title:
-            firstline = 'Merge #%s: %s' % (pull,title)
+            firstline = f'Merge #{pull}: {title}'
         else:
-            firstline = 'Merge #%s' % (pull,)
+            firstline = f'Merge #{pull}'
         message = firstline + '\n\n'
         message += subprocess.check_output([GIT,'log','--no-merges','--topo-order','--pretty=format:%h %s (%an)',base_branch+'..'+head_branch]).decode('utf-8')
         message += '\n\nPull request description:\n\n  ' + body.replace('\n', '\n  ') + '\n'
@@ -242,7 +242,7 @@ def main():
 
         symlink_files = get_symlink_files()
         for f in symlink_files:
-            print("ERROR: File %s was a symlink" % f)
+            print(f"ERROR: File {f} was a symlink" % f)
         if len(symlink_files) > 0:
             sys.exit(4)
 
@@ -265,7 +265,7 @@ def main():
         # Run test command if configured.
         if testcmd:
             if subprocess.call(testcmd,shell=True):
-                print("ERROR: Running %s failed." % testcmd,file=stderr)
+                print(f"ERROR: Running {testcmd} failed.",file=stderr)
                 sys.exit(5)
 
             # Show the created merge.
@@ -328,4 +328,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
