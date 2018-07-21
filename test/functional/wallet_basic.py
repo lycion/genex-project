@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# Copyright (c) 2014-2017 The Bitcoin Core developers
+# Copyright (c) 2014-2017 The Genex Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the wallet."""
 from decimal import Decimal
 import time
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import GenexTestFramework
 from test_framework.util import (
     assert_array_result,
     assert_equal,
@@ -18,7 +18,7 @@ from test_framework.util import (
     wait_until,
 )
 
-class WalletTest(BitcoinTestFramework):
+class WalletTest(GenexTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
         self.setup_clean_chain = True
@@ -396,7 +396,7 @@ class WalletTest(BitcoinTestFramework):
             '-reindex',
             '-zapwallettxes=1',
             '-zapwallettxes=2',
-            # disabled until issue is fixed: https://github.com/bitcoin/bitcoin/issues/7463
+            # disabled until issue is fixed: https://github.com/genex/genex/issues/7463
             # '-salvagewallet',
         ]
         chainlimit = 6

@@ -1,9 +1,9 @@
-// Copyright (c) 2016-2017 The Bitcoin Core developers
+// Copyright (c) 2016-2017 The Genex Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_TEST_RPCNESTEDTESTS_H
-#define BITCOIN_QT_TEST_RPCNESTEDTESTS_H
+#ifndef genex_QT_TEST_RPCNESTEDTESTS_H
+#define genex_QT_TEST_RPCNESTEDTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -19,4 +19,4 @@ class RPCNestedTests : public QObject
     void rpcNestedTests();
 };
 
-#endif // BITCOIN_QT_TEST_RPCNESTEDTESTS_H
+#endif // genex_QT_TEST_RPCNESTEDTESTS_H

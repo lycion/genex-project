@@ -1,5 +1,5 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Genex Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1020,8 +1020,8 @@ UniValue gettxout(const JSONRPCRequest& request)
             "     \"hex\" : \"hex\",        (string) \n"
             "     \"reqSigs\" : n,          (numeric) Number of required signatures\n"
             "     \"type\" : \"pubkeyhash\", (string) The type, eg pubkeyhash\n"
-            "     \"addresses\" : [          (array of string) array of bitcoin addresses\n"
-            "        \"address\"     (string) bitcoin address\n"
+            "     \"addresses\" : [          (array of string) array of genex addresses\n"
+            "        \"address\"     (string) genex address\n"
             "        ,...\n"
             "     ]\n"
             "  },\n"
@@ -2036,7 +2036,7 @@ UniValue scantxoutset(const JSONRPCRequest& request)
             "                                      \"status\" for progress report (in %) of the current scan\n"
             "2. \"scanobjects\"                  (array, optional) Array of scan objects (only one object type per scan object allowed)\n"
             "      [\n"
-            "        { \"address\" : \"<address>\" },       (string, optional) Bitcoin address\n"
+            "        { \"address\" : \"<address>\" },       (string, optional) Genex address\n"
             "        { \"script\"  : \"<scriptPubKey>\" },  (string, optional) HEX encoded script (scriptPubKey)\n"
             "        { \"pubkey\"  :                      (object, optional) Public key\n"
             "          {\n"

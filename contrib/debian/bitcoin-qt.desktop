@@ -1,14 +1,14 @@
 [Desktop Entry]
 Version=1.0
-Name=Bitcoin Core
-Comment=Connect to the Bitcoin P2P Network
-Comment[de]=Verbinde mit dem Bitcoin peer-to-peer Netzwerk
-Comment[fr]=Bitcoin, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=Bitcoin, eşten eşe kriptografik sanal para birimi
-Exec=bitcoin-qt %u
+Name=Genex Core
+Comment=Connect to the Genex P2P Network
+Comment[de]=Verbinde mit dem Genex peer-to-peer Netzwerk
+Comment[fr]=Genex, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Genex, eşten eşe kriptografik sanal para birimi
+Exec=genex-qt %u
 Terminal=false
 Type=Application
-Icon=bitcoin128
-MimeType=x-scheme-handler/bitcoin;
+Icon=genex128
+MimeType=x-scheme-handler/genex;
 Categories=Office;Finance;P2P;Network;Qt;
-StartupWMClass=Bitcoin-qt
+StartupWMClass=Genex-qt

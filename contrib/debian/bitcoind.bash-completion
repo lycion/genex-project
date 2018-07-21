@@ -1,2 +1,2 @@
-contrib/bitcoind.bash-completion	bitcoind
-contrib/bitcoin-cli.bash-completion	bitcoin-cli
+contrib/genexd.bash-completion	genexd
+contrib/genex-cli.bash-completion	genex-cli

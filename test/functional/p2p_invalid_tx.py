@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2015-2017 The Bitcoin Core developers
+# Copyright (c) 2015-2017 The Genex Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test node responses to invalid transactions.
@@ -14,14 +14,14 @@ from test_framework.messages import (
     CTxOut,
 )
 from test_framework.mininode import P2PDataStore
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import GenexTestFramework
 from test_framework.util import (
     assert_equal,
     wait_until,
 )
 
 
-class InvalidTxRequestTest(BitcoinTestFramework):
+class InvalidTxRequestTest(GenexTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True

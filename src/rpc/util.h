@@ -1,9 +1,9 @@
-// Copyright (c) 2017 The Bitcoin Core developers
+// Copyright (c) 2017 The Genex Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_RPC_UTIL_H
-#define BITCOIN_RPC_UTIL_H
+#ifndef genex_RPC_UTIL_H
+#define genex_RPC_UTIL_H
 
 #include <pubkey.h>
 #include <script/standard.h>
@@ -24,4 +24,4 @@ CScript CreateMultisigRedeemscript(const int required, const std::vector<CPubKey
 
 UniValue DescribeAddress(const CTxDestination& dest);
 
-#endif // BITCOIN_RPC_UTIL_H
+#endif // genex_RPC_UTIL_H

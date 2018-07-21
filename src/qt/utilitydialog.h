@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2017 The Genex Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_UTILITYDIALOG_H
-#define BITCOIN_QT_UTILITYDIALOG_H
+#ifndef genex_QT_UTILITYDIALOG_H
+#define genex_QT_UTILITYDIALOG_H
 
 #include <QDialog>
 #include <QObject>
 
-class BitcoinGUI;
+class GenexGUI;
 
 namespace interfaces {
     class Node;
@@ -46,10 +46,10 @@ class ShutdownWindow : public QWidget
 
 public:
     explicit ShutdownWindow(QWidget *parent=0, Qt::WindowFlags f=0);
-    static QWidget *showShutdownWindow(BitcoinGUI *window);
+    static QWidget *showShutdownWindow(GenexGUI *window);
 
 protected:
     void closeEvent(QCloseEvent *event);
 };
 
-#endif // BITCOIN_QT_UTILITYDIALOG_H
+#endif // genex_QT_UTILITYDIALOG_H

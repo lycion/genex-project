@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Genex Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_WALLET_H
-#define BITCOIN_WALLET_WALLET_H
+#ifndef genex_WALLET_WALLET_H
+#define genex_WALLET_WALLET_H
 
 #include <amount.h>
 #include <outputtype.h>
@@ -319,7 +319,7 @@ public:
     unsigned int nTimeSmart;
     /**
      * From me flag is set to 1 for transactions that were created by the wallet
-     * on this bitcoin node, and set to 0 for transactions that were created
+     * on this genex node, and set to 0 for transactions that were created
      * externally and came in through the network or sendrawtransaction RPC.
      */
     char fFromMe;
@@ -1290,4 +1290,4 @@ public:
 // be IsAllFromMe).
 int64_t CalculateMaximumSignedTxSize(const CTransaction &tx, const CWallet *wallet);
 int64_t CalculateMaximumSignedTxSize(const CTransaction &tx, const CWallet *wallet, const std::vector<CTxOut>& txouts);
-#endif // BITCOIN_WALLET_WALLET_H
+#endif // genex_WALLET_WALLET_H
