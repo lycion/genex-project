@@ -333,7 +333,7 @@ for selinuxvariant in %{selinux_variants}; do
 	%{_sbindir}/semodule -s ${selinuxvariant} -i %{_datadir}/selinux/${selinuxvariant}/genex.pp &> /dev/null || :
 done
 %{_sbindir}/semanage port -a -t genex_port_t -p tcp 8332
-%{_sbindir}/semanage port -a -t genex_port_t -p tcp 8333
+%{_sbindir}/semanage port -a -t genex_port_t -p tcp 17070
 %{_sbindir}/semanage port -a -t genex_port_t -p tcp 18332
 %{_sbindir}/semanage port -a -t genex_port_t -p tcp 18333
 %{_sbindir}/semanage port -a -t genex_port_t -p tcp 18443
@@ -354,7 +354,7 @@ fi
 if [ $1 -eq 0 ]; then
 	if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
 	%{_sbindir}/semanage port -d -p tcp 8332
-	%{_sbindir}/semanage port -d -p tcp 8333
+	%{_sbindir}/semanage port -d -p tcp 17070
 	%{_sbindir}/semanage port -d -p tcp 18332
 	%{_sbindir}/semanage port -d -p tcp 18333
 	%{_sbindir}/semanage port -d -p tcp 18443
