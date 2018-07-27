@@ -118,3 +118,4 @@ libgenexconsensus.pc
 contrib/devtools/split-debug.sh
 contrib/devtools/copyright_header.py
 contrib/devtools/update-translations.py
+contrib/devtools/copyright_header.py

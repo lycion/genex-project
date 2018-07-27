@@ -15,6 +15,16 @@ uint256 CBlockHeader::GetHash() const
     return SerializeHash(*this);
 }
 
+uint256 CBlockHeader::GetPoWHash(const int nHeight) const
+{
+   uint256 thash;
+   if(nHeight >= 0) // Lyra2re2 Algorithm from genesis
+   {
+        lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
+   }
+   return thash;
+}
+
 std::string CBlock::ToString() const
 {
     std::stringstream s;
