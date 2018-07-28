@@ -10,7 +10,7 @@
 
 > cd usr/src/
 
-> sudo git clone https://github.com/genexcore/genex-projject
+> sudo git clone https://github.com/genexcore/genex-project
 
 > cd genex-project
 
