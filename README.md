@@ -1,30 +1,81 @@
 # The Genex Core Project
 
-#### Who are we?
-Well its a bit of a long story but I'll shorten it. Genex was originally a *Cryptonight* coin but was only in the early stages. The Core Developer was mining somebody else's coin based on Scrypt, that got quickly took over by ASIC's and the coin went offline. So, what happened then was *Genex* spoke with the creator of that coin, *Zer0coin (ZER0)* and they decided to team up to create an ASIC resistant coin. After many failed attempts we decided to take a step back. Go straight back the original Crypto, *Bitcoin (BTC)* and make a successful fork from that. We will slowly, as a team, make every step needed to make a successful fork of *Bitcoin* in to *Genex* that will be ASIC resistant and remain that way. We encourage people to *Fork* this repo and make Pull Requests *(PR's)*, by helping us create the crypto currency, you will earn a special spot in our Discord Server.
+![alt text](https://github.com/genexcore/genex-project/blob/master/src/qt/res/icons/about.png "Genex Core")
 
-#### Social Links
+### Current build instructions
 
-https://discord.gg/3ZrMQCM - **DISCORD**
+> cd ..
 
-https://www.reddit.com/r/GenexCore - **SUBREDDIT**
+> cd ..
 
-### The People of Genex Core
+> cd usr/src/
 
-**Core Developer** - 
-*Genex* 
+> sudo git clone https://github.com/genexcore/genex-projject
 
-**Co-Developers** - 
-*Zer0*, *Sajo*
+> cd genex-project
 
-**Sponsor** - 
-*Oxytope*
+> sudo chmod +x autogen.sh share/genbuild.sh src/leveldb/build_detect_platform
 
-**Discord Mod** - 
-*Navek*
+> sudo chmod 777 src/leveldb
 
-#### Discord Server
+> cd depends
 
-https://discord.gg/3ZrMQCM
+> sudo chmod +x config.guess config.site.in config.sub
 
-Our Discord server is a place where you can talk about other Crypto Currencies, buy and sell items with crypto, level up your user to earn *"Evolved"* and the *"Master Evolved* title, theres an off-topic channel to speak about *anythinggg* you want, a place for reference links *(only members with a "Regulars" title or above can post ref links for spam reasons)*. It's filled with everything you could want really and its updating all the time.
+> sudo make HOST=x86_64-w64-mingw32 -j4
+
+> cd ..
+
+> sudo ./autogen.sh
+
+> sudo CONFIG_SITE=/usr/src/genex-project/depends/x86_64-w64-mingw32/share/config.site ./configure --host=x86_64-w64-mingw32 --disable-tests 
+--with-qt-incdir=/usr/include/x86_64-linux-gnu/qt5 --with-qt-libdir=/usr/lib/x86_64-linux-gnu/
+
+> sudo make HOST=x86_64-w64-mingw32 V=1 AUTOCONF=: AUTOHEADER=: AUTOMAKE=: ACLOCAL=: -i
+
+##### Build notes
+
+The first 2 "cd .." commands are needed as Linux's default is under $home/username/thisfolder. Sudo is also required as you've entered $usr/. Do not forget you need to chmod some files before ./autogen.sh & ./configure is able to run. Following the commands above should lead to success, these are just from my personal machine so it *MAY* be different on yours.
+
+### Current Genex tasks
+
+- [x] Make a fork clone of Bitcoin
+- [x] Change Bitcoin algorithm
+- [ ] Successful change from Bitcoin in to Genex
+- [x] NO PREMINE
+- [ ] Change to run on its own Blockchain
+- [x] Change images & logos
+- [x] Build community
+- [X] Get community involved
+- [ ] Launch of Genex
+- [ ] Listed on exchange
+- [x] New developers
+- [ ] Genex TipBot
+- [ ] Discord exchange bot (this could be used before Genex listed. The more times its bought and sold, the more times the price goes up and down
+- [ ] Web wallet
+- [ ] Pool
+- [ ] Make short Genex introduction video
+- [ ] Businesses accepting Genex
+
+### Current jobs
+
+- [x] Developers (always open for more developers to join us
+- [ ] Image & Icon creators (Job filled)
+- [x] Marketing
+- [x] Sponsors
+
+### Our team
+
+Core Developer - Genex
+
+Co Developer - Sajo811 | Zer0
+
+Sponsor - Oxytope
+
+Discord Mod - Navek41
+
+### Social
+
+https://discord.gg/3ZrMQCM - *Discord*
+
+https://www.reddit.com/r/GenexCore - *Reddit*
