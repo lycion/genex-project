@@ -10,6 +10,16 @@
 #include <utilstrencodings.h>
 #include <crypto/common.h>
 
+uint256 CBlockHeader::GetPoWHash(const int nHeight) const
+{
+   uint256 thash;
+   if(Params().NetworkIDString() == CBaseChainParams::MAIN || nHeight >= 0) // New Lyra2re2 algorithm
+   {
+        lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
+   }
+   return thash;
+}
+
 std::string CBlock::ToString() const
 {
     std::stringstream s;
