@@ -302,33 +302,15 @@ crypto_libgenex_crypto_a_SOURCES = \
   crypto/hmac_sha512.h \
   crypto/ripemd160.cpp \
   crypto/ripemd160.h \
+  crypto/scrypt.cpp \
+  crypto/scrypt.h \
+  crypto/scrypt-sse2.cpp \
   crypto/sha1.cpp \
   crypto/sha1.h \
   crypto/sha256.cpp \
   crypto/sha256.h \
   crypto/sha512.cpp \
   crypto/sha512.h \
-  crypto/scrypt.cpp \
-  crypto/scrypt.h \
-  crypto/scrypt-sse2.cpp \
-  crypto/Lyra2RE/Lyra2RE.c \
-  crypto/Lyra2RE/Lyra2RE.h \
-  crypto/Lyra2RE/Lyra2.c \
-  crypto/Lyra2RE/Lyra2.h \
-  crypto/Lyra2RE/Sponge.c \
-  crypto/Lyra2RE/Sponge.h \
-  crypto/Lyra2RE/blake.c \
-  crypto/Lyra2RE/blake.h \
-  crypto/Lyra2RE/groestl.c \
-  crypto/Lyra2RE/groestl.h \
-  crypto/Lyra2RE/keccak.c \
-  crypto/Lyra2RE/keccak.h \
-  crypto/Lyra2RE/skein.c \
-  crypto/Lyra2RE/skein.h \
-  crypto/Lyra2RE/cubehash.c \
-  crypto/Lyra2RE/cubehash.h \
-  crypto/Lyra2RE/bmw.c \
-  crypto/Lyra2RE/bmw.h
 
 if USE_ASM
 crypto_libgenex_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
@@ -387,7 +369,26 @@ libgenex_consensus_a_SOURCES = \
   utilstrencodings.cpp \
   utilstrencodings.h \
   version.h
-
+  crypto/Lyra2RE/Lyra2RE.c \
+  crypto/Lyra2RE/Lyra2RE.h \
+  crypto/Lyra2RE/Lyra2.c \
+  crypto/Lyra2RE/Lyra2.h \
+  crypto/Lyra2RE/Sponge.c \
+  crypto/Lyra2RE/Sponge.h \
+  crypto/Lyra2RE/blake.c \
+  crypto/Lyra2RE/sph_blake.h \
+  crypto/Lyra2RE/groestl.c \
+  crypto/Lyra2RE/sph_groestl.h \
+  crypto/Lyra2RE/keccak.c \
+  crypto/Lyra2RE/sph_keccak.h \
+  crypto/Lyra2RE/skein.c \
+  crypto/Lyra2RE/sph_skein.h \
+  crypto/Lyra2RE/cubehash.c \
+  crypto/Lyra2RE/sph_cubehash.h \
+  crypto/Lyra2RE/bmw.c \
+  crypto/Lyra2RE/sph_bmw.h \
+  crypto/Lyra2RE/sph_types.h
+  
 # common: shared between genexd, and genex-qt and non-server tools
 libgenex_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(genex_INCLUDES)
 libgenex_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
