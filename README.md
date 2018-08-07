@@ -21,3 +21,6 @@ This is still a project in beta but is getting worked on. Check out our Wiki at 
 
 ### Current Goals
 * [GitHub Wiki Goals](https://github.com/genexcore/genex-project/wiki/Goals)
+
+### Discord Server
+* https://discord.gg/Q2swgSb
